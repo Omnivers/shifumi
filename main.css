@@ -1,15 +1,24 @@
 body{
+    margin: 0;
     display: flex;
     color: white;
     font-family: 'Press Start 2P', cursive; 
 }
 main{
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-aside{
+#gameEnd{
+    display:none;
+    top:10%;
+    left:15%;
+    width: 50%;
+    position: absolute;
+    z-index: 11;
+} 
+/* aside{
     display: flex;
     justify-content: space-around;
     flex-direction: column;
@@ -18,8 +27,7 @@ aside{
     box-shadow: black 20px 10px 50px ;
     font-size: 20px;
     width: 10%;
-    
-}
+} */
 .title{
     background-color: blueviolet;
     box-shadow: black 20px 10px 50px ;
@@ -42,7 +50,7 @@ aside{
     font-size: 20px;
     font-family:'Press Start 2P', cursive;
     background-color: black;
-    padding: 30px;
+    padding: 20px;
     margin: 5px;
     width: 100%;
 }
