@@ -1,8 +1,25 @@
+::-webkit-scrollbar {
+    width: 0.5em;
+  
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #3f3f3f;
+    border-radius: 10px;
+    margin-block: .1 em;
+  }
+  ::-webkit-scrollbar-thumb {
+    background:blueviolet;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background:#7c7c7c;
+  }
 body{
     margin: 0;
     display: flex;
     color: white;
     font-family: 'Press Start 2P', cursive; 
+    overflow-y: hidden;
 }
 main{
     width: 70%;
@@ -13,27 +30,38 @@ main{
 #gameEnd{
     display:none;
     position: absolute;
-    top:10%;
+    top:7%;
     left:5%;
     z-index: 11;
 }
 aside{
-    color:yellow;
+    overflow-y: scroll;
     padding: 10px;
     margin: 20px;
-    line-height: 4;
+    margin-right: 0;
+    line-height: 3;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: rgb(0,0,0,0.8);
     box-shadow: black 20px 10px 50px ;
-    font-size: 10px;
+    font-size: 15px;
     width: 30%;
+    height: 750px;
 }
 .title{
     background-color: blueviolet;
     box-shadow: black 20px 10px 50px ;
     padding: 10px;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+.vs{
+    margin-top: 200px;
+    font-size: 30px;
+}
+.playerName{
+    margin-bottom: 15px;
+    font-size: 30px;
 }
 .content{
     display: flex;
@@ -72,9 +100,23 @@ img{
     border-radius: 20px;
     margin-bottom: 40px;
 }
-span{
+.scores{
     color: yellow;
     margin: 30px;
     background-color: rgb(0,0,0,0.8);
     padding: 10px;
+}
+.aside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.round{
+    color: yellow;
+}
+h3{
+    color:blueviolet
+}
+.break{
+   color: black; 
 }

@@ -2,7 +2,10 @@ let images=["./img/1.png","./img/2.png","./img/3.png"]; //The imgs of rock/paper
 const imgPlayer=document.getElementById("imagePlayer"); // imgPlayer equals the the img that the player choosed
 const imgAI=document.getElementById("imageIA");//imgAI equals the img that IA choosed
 const gameEnd=document.getElementById("gameEnd");// For the results animation
-const scoregeneral=document.querySelector('.score');
+const scoregeneral=document.querySelector('.aside');
+const shi= new Audio("./img/shi.mp3");
+const fu= new Audio('./img/fu.mp3');
+const mi= new Audio('./img/mi.mp3');
 
 // firstable we declare string variables of what the player&IA choosed with a null value
 let choiceplayer;
@@ -19,14 +22,17 @@ const papier=document.getElementById("papier");
 const ciseaux=document.getElementById("ciseaux");
 
 pierre.addEventListener("click", function() {
+    shi.play();
      animation();//Animation before the AI choose his random img
     setTimeout(rock,1000)
     });
 papier.addEventListener("click",function() {
+    fu.play();
     animation();
    setTimeout(paper,1000)
    });
 ciseaux.addEventListener("click",function() {
+    mi.play();
      animation();
    setTimeout(cut,1000)
    });
@@ -121,25 +127,28 @@ function score(){
     document.getElementById("Random").innerHTML=choiceAI
 }
 function leaderBoard(){
-    scoregeneral.innerHTML= scoregeneral.innerHTML+ `<br> Round : ${round} <br>
-    Vous avez choisi : ${choiceplayer} // L'IA a choisis : ${choiceAI}<br>
-     ${resultat}`;
+    scoregeneral.innerHTML= scoregeneral.innerHTML+ `<div class='aside'><h1 class="round"> Round : ${round} </h1>
+    <span class="choicePlayer">Vous avez choisi : ${choiceplayer} </span> <span class="choiceIA">L'IA a choisis : ${choiceAI}</span>
+    <h3>${resultat}<h3>
+    <span class="break">-----------------------<span>
+    </div>`;
     if(scoreIA===3){
         const video=document.createElement('video');
         video.src='./img/lose.mp4';
         video.autoplay = true;
         video.controls = false;
         video.muted = false;
-        video.width = 1300;
+        video.width = 1100;
         gameEnd.appendChild(video);
         gameEnd.style.display="block"
         video.addEventListener('ended', (event) => {
             gameEnd.style.display = 'none';
             gameEnd.innerHTML='';
+            scoregeneral.innerHTML=`<h2 class="aside">Welcome</h2>`;
         })
         document.getElementById('scorePlayer').innerHTML=scorePl
         document.getElementById('scoreIA').innerHTML=scoreIA
-        scoregeneral.innerHTML=`GAME OVER !`;
+        scoregeneral.innerHTML=`<h1 class="round">GAME OVER !</h1>`;
         scoreIA=0;
         scorePl=0;
         round=0
@@ -150,16 +159,17 @@ function leaderBoard(){
         video.autoplay = true;
         video.controls = false;
         video.muted = false;
-        video.width = 1300;
+        video.width = 1100;
         gameEnd.appendChild(video);
         gameEnd.style.display="block"
         video.addEventListener('ended', (event) => {
             gameEnd.style.display = 'none';
             gameEnd.innerHTML='';
+            scoregeneral.innerHTML=`<h2 class="aside">Welcome</h2>`;
         })
         document.getElementById('scorePlayer').innerHTML=scorePl
         document.getElementById('scoreIA').innerHTML=scoreIA
-        scoregeneral.innerHTML=`CONGRATULATION !`;
+        scoregeneral.innerHTML=`<h1 class="round">CONGRATULATION !</h1>`;
         scoreIA=0;
         scorePl=0;
         round=0

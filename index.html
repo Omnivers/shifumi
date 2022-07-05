@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"/>
     <link rel="stylesheet" href="main.css">
     <title>Shifumi</title>
@@ -15,23 +16,23 @@
     <h1 class="title">Shifumi</h1>
     <section class="content">
         <div id="player" class="player">
-            <h1>Player 1</h1>
+            <h1 class="playerName">Player 1</h1>
             <img id="imagePlayer" src="./img/1.png">
             <button id="pierre" class="btn">Pierre</button>
             <button id="papier" class="btn">Papier</button>
             <button id="ciseaux" class="btn">Ciseaux</button>
-            <span id="scorePlayer">SCORE </span>
+            <span id="scorePlayer" class="scores">SCORE </span>
         </div>
-        <h1>VS</h1>
+        <h1 class="vs">VS</h1>
         <div id="IA" class="player">
-            <h1>I.A</h1>
+            <h1 class="playerName">I.A</h1>
             <img id="imageIA" src="./img/2.png">
             <button id="Random" class="btn IA">I.A choose</button>
-            <span id="scoreIA">SCORE </span>
+            <span id="scoreIA" class="scores">SCORE </span>
         </div>
     </section>
     </main>
-    <aside class="score">Welcome !</aside>
+    <aside class="aside">Welcome</aside>
    <script src="index.js"></script>
 </body>
 </html>
