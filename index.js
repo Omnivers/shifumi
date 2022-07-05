@@ -3,39 +3,31 @@ const imgPlayer=document.getElementById("imagePlayer"); // imgPlayer equals the 
 const imgAI=document.getElementById("imageIA");//imgAI equals the img that IA choosed
 const gameEnd=document.getElementById("gameEnd");// For the results animation
 const scoregeneral=document.querySelector('.score');
-// class Round{
-//     constructor(round,resultplayer,resultIA,result){
-//         this.round=round;
-//         this.resultplayer=resultplayer;
-//         this.resultIA=resultIA;
-//         this.result=result;
-//     }
 
-
-// }
 // firstable we declare string variables of what the player&IA choosed with a null value
 let choiceplayer;
 let choiceAI;
 // Then we declare the points and the rounds that the player&AI earned by playing
 let scorePl=0;
 let scoreIA=0;
-let roundAI=0;
-let roundPl=0;
+let round=0;
+let resultat="";
+
 //DOM setting for the rock/paper/scissors :
 const pierre=document.getElementById("pierre");
 const papier=document.getElementById("papier");
 const ciseaux=document.getElementById("ciseaux");
 
 pierre.addEventListener("click", function() {
-     imgAI.src="./img/giphy.gif";//Animation before the AI choose his random img
+     animation();//Animation before the AI choose his random img
     setTimeout(rock,1000)
     });
 papier.addEventListener("click",function() {
-    imgAI.src="./img/giphy.gif";
+    animation();
    setTimeout(paper,1000)
    });
 ciseaux.addEventListener("click",function() {
-    imgAI.src="./img/giphy.gif";
+     animation();
    setTimeout(cut,1000)
    });
 
@@ -77,95 +69,100 @@ function cut(){
     setTimeout(score,100);
 }
 function score(){
-    if(choiceplayer==='Pierre' && choiceAI==='Papier'){
+    if(choiceplayer===choiceAI){
+        round++
+        resultat="Egalité"
+        leaderBoard();
+    }
+    else if(choiceplayer==='Pierre' && choiceAI==='Papier'){
+        round++
         pierre.style.backgroundColor='red';
         scoreIA++;
+        resultat=`IA a gagné le round ${round}`;
+        leaderBoard();
     }
     else if(choiceplayer==='Pierre' && choiceAI==='Ciseaux'){
+        round++
         scorePl++;
         document.getElementById("Random").style.backgroundColor='red';
+        resultat=`Player 1 a gagné le round ${round}`
+        leaderBoard();
     }
     else if(choiceplayer==='Papier' && choiceAI==='Pierre'){
+        round++
         scorePl++;
         document.getElementById("Random").style.backgroundColor='red';
+        resultat=`Player 1 a gagné le round ${round}`
+        leaderBoard();
     }
     else if(choiceplayer==='Papier' && choiceAI==='Ciseaux'){
+        round++
         papier.style.backgroundColor='red';
         scoreIA++;
+        resultat=`IA a gagné le round ${round}`
+        leaderBoard();
     }
     else if(choiceplayer==='Ciseaux' && choiceAI==='Pierre'){
+        round++
         ciseaux.style.backgroundColor='red';
         scoreIA++;
+        resultat=`IA a gagné le round ${round}`
+        leaderBoard();
     }
     else if(choiceplayer==='Ciseaux' && choiceAI==='Papier'){
+        round++
         scorePl++;
         document.getElementById("Random").style.backgroundColor='red';
+        resultat=`Player 1 a gagné le round ${round}`
+        leaderBoard();
     }
     document.getElementById('scorePlayer').innerHTML=scorePl
     document.getElementById('scoreIA').innerHTML=scoreIA
     document.getElementById("Random").innerHTML=choiceAI
-    if(scorePl>2){
-        roundPl++
-        scorePl=0;
-        scoreIA=0;
-        leaderBoard();
-        document.getElementById('scorePlayer').innerHTML=scorePl
-        document.getElementById('scoreIA').innerHTML=scoreIA
-    }
-    else if(scoreIA>2){
-        roundAI++
-        scoreIA=0;
-        scorePl=0;
-        leaderBoard();
-        document.getElementById('scorePlayer').innerHTML=scorePl
-        document.getElementById('scoreIA').innerHTML=scoreIA
-    }
-    else if (roundPl>4) {
-        scoregeneral.innerHTML=``;
-    }
-    else if(roundAI>4){
-        scoregeneral.innerHTML=``;
-    }
 }
 function leaderBoard(){
-    scoregeneral.innerHTML=`L'IA a remporté :${roundAI} rounds<br>
-    Vous avez remporté : ${roundPl} rounds
-    `;
-    if(roundAI>4){
-        scoreIA=0;
-        scorePl=0;
+    scoregeneral.innerHTML= scoregeneral.innerHTML+ `<br> Round : ${round} <br>
+    Vous avez choisi : ${choiceplayer} // L'IA a choisis : ${choiceAI}<br>
+     ${resultat}`;
+    if(scoreIA===3){
         const video=document.createElement('video');
         video.src='./img/lose.mp4';
         video.autoplay = true;
         video.controls = false;
         video.muted = false;
+        video.width = 1300;
         gameEnd.appendChild(video);
         gameEnd.style.display="block"
         video.addEventListener('ended', (event) => {
             gameEnd.style.display = 'none';
             gameEnd.innerHTML='';
         })
+        document.getElementById('scorePlayer').innerHTML=scorePl
+        document.getElementById('scoreIA').innerHTML=scoreIA
         scoregeneral.innerHTML=`GAME OVER !`;
-        roundAI=0;
-        roundPl=0;
-    }
-    else if(roundPl>4){
-        scorePl=0;
         scoreIA=0;
+        scorePl=0;
+        round=0
+    }
+    else if(scorePl===3){
         const video=document.createElement('video');
         video.src='./img/win.mp4';
         video.autoplay = true;
         video.controls = false;
         video.muted = false;
+        video.width = 1300;
         gameEnd.appendChild(video);
         gameEnd.style.display="block"
         video.addEventListener('ended', (event) => {
             gameEnd.style.display = 'none';
             gameEnd.innerHTML='';
         })
+        document.getElementById('scorePlayer').innerHTML=scorePl
+        document.getElementById('scoreIA').innerHTML=scoreIA
         scoregeneral.innerHTML=`CONGRATULATION !`;
-        roundAI=0;
-        roundPl=0;
+        scoreIA=0;
+        scorePl=0;
+        round=0
     }
 }
 
@@ -187,4 +184,14 @@ function choice(){
     else{
         choiceAI='Ciseaux'
     }
+}
+
+function animation(){
+    papier.style.backgroundColor='blueviolet';
+    pierre.style.backgroundColor='blueviolet';
+    ciseaux.style.backgroundColor='blueviolet';
+    document.getElementById("Random").style.backgroundColor='black';
+    imgAI.src="./img/giphy.gif";
+    document.getElementById("Random").innerHTML="SHI-FU-MI";
+
 }
